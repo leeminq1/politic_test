@@ -8,7 +8,7 @@ import Loading from './pages/Loading';
 function App() {
   const [loading,setLoading]=useState(true);
 
-  useState(()=>{
+  useEffect(()=>{
     setTimeout(()=>{
       setLoading(false)
     },2000)
