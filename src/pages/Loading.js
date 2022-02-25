@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { render } from "react-dom";
-
+// import { render } from "react-dom";
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
 

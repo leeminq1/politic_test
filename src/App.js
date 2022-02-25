@@ -6,13 +6,12 @@ import Loading from './pages/Loading';
 
 
 function App() {
-  const [loading,setLoading]=useState(false);
+  const [loading,setLoading]=useState(true);
 
   useState(()=>{
-    // setTimeout(()=>{
-    //   setLoading(false)
-    // },500)
-
+    setTimeout(()=>{
+      setLoading(false)
+    },2000)
   },[])
 
   if(loading){

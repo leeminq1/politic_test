@@ -1,10 +1,10 @@
 import React,{useState,useRef} from 'react'
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
 import * as tmImage from '@teachablemachine/image';
 import styled from "styled-components";
 import {Container,TopContainer,TopTitle,TopImage,BgImg,
   ImageText} from "../components/styledComponents"
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import { MdIosShare } from "react-icons/md";
 import {BsArrowCounterclockwise} from "react-icons/bs";
@@ -19,7 +19,8 @@ const URL = 'https://teachablemachine.withgoogle.com/models/KAoZrcPlp/';
 const modelURL = URL + 'model.json';
 const metadataURL = URL + 'metadata.json';
 
-let model, maxPredictions;
+let model
+
 
 const ImageUploadContainer=styled.input`
     width:100%;
@@ -143,17 +144,18 @@ const Main = ({history}) => {
   // Load the image model and setup the webcam
     async function init() {
 
-      let isIos = false; 
-      // fix when running demo in ios, video will be frozen;
-      if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
-        isIos = true;
-      }
+      // let isIos = false; 
+      // // fix when running demo in ios, video will be frozen;
+      // if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
+      //   isIos = true;
+      // }
       // load the model and metadata
       // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
       // or files from your local hard drive
       // Note: the pose library adds "tmImage" object to your window (window.tmImage)
       model = await tmImage.load(modelURL, metadataURL);
       //총 클래스 수
+      let maxPredictions;
       maxPredictions = model.getTotalClasses();
   }
   
@@ -196,7 +198,7 @@ const Main = ({history}) => {
   
       }
     }
-
+    console.log(imgFile)
   return (
     <Container>
       <TopContainer>
