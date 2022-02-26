@@ -15,8 +15,8 @@ export const Container = styled.div`
   /* position:relative; */
   @media (min-width: 800px) {
     width: 600px;
-    border-left:1px solid #95afc0;
-    border-right:1px solid #95afc0;
+    /* border-left:1px solid #95afc0;
+    border-right:1px solid #95afc0; */
   }
 `;
 
@@ -51,7 +51,7 @@ export const ImageContainer=styled.div`
   /* border:3px dashed #535c68; */
   justify-content:center;
   align-items:center;
-  box-shadow: 0px 14px 54.6px 29.4px rgba(0, 0, 0, 0.13);
+  box-shadow: 0px 3px 20px 10px rgba(0, 0, 0, 0.10);
   flex-direction:column;
 `;
 
@@ -85,9 +85,12 @@ export const TopContainer=styled.div`
 `;
 
 export const TopTitle=styled.h1`
-  font-size:30px;
+  font-size:20px;
   font-weight:bolder;   
   color:white;
+  @media (min-width: 800px) {
+        font-size:30px;
+    }
 `;
 
 export const Title=styled(TopTitle)`
@@ -96,18 +99,20 @@ export const Title=styled(TopTitle)`
 `;
 
 export const BottomContainer=styled.div`
-  width: 80%;
+  width: 100%;
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
   margin-top:10%;
+  background-color:#EEEEEE;
   @media (min-width: 800px) {
-    width: 60%;
+    width: 100%;
     }
 `;
 export const BottomMainText=styled.h1`
-      font-size:20px;
+      width:60%;
+      font-size:15px;
       font-weight:bolder;   
       color:#0f3457;
       text-align: center;
@@ -117,6 +122,7 @@ export const BottomMainText=styled.h1`
     }
 `;
 export const BootomSubText=styled.h1`
+     width:60%;
      font-size:10px;
      font-weight:bolder;   
      color:#979797;
