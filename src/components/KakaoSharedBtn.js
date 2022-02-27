@@ -43,18 +43,18 @@ const KakaoShareBtn = ({name}) => {
         content: {
           title: "나와 닮은 정치인은?",
           description: `나와 닮은 정치인은 ${name}이네요! 결과를 확인하고 공유해보세요!`,
-          imageUrl: `https://politictest.netlify.app/result/${name}.jpg`,
+          imageUrl: `https://politictest-8f628.firebaseapp.com/result/${name}.jpg`,
           link: {
-            mobileWebUrl: "https://politictest.netlify.app/",
-            webUrl: "https://politictest.netlify.app/",
+            mobileWebUrl: "https://politictest-8f628.firebaseapp.com/",
+            webUrl: "https://politictest-8f628.firebaseapp.com/",
           },
         },
         buttons: [
           {
             title: "웹으로 보기",
             link: {
-                mobileWebUrl: "https://politictest.netlify.app/",
-                webUrl: "https://politictest.netlify.app/",
+                mobileWebUrl: "https://politictest-8f628.firebaseapp.com/",
+                webUrl: "https://politictest-8f628.firebaseapp.com/",
               },
           },
         ],
