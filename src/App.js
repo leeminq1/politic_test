@@ -11,7 +11,7 @@ function App() {
   useEffect(()=>{
     setTimeout(()=>{
       setLoading(false)
-    },2500)
+    },2700)
   },[])
 
   if(loading){

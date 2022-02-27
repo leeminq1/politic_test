@@ -71,6 +71,7 @@ const ImageContainer=styled.div`
 const Image=styled.img`
     width:90%;
     height:90%;
+    border-radius:10px;
 `;
 
 const Title=styled.h1`
@@ -123,11 +124,11 @@ const ReulstName=styled.h1`
 const KeyText=styled.h1`
     text-align: center;
     color: #193354;
-    font-size:20px;
+    font-size:15px;
     font-weight:bolder;
     margin-top:-10px;
     @media (min-width: 800px) {
-      font-size:30px;
+      font-size:20px;
   }
 `;
 
@@ -167,6 +168,24 @@ const BottomBtn=styled.button`
     font-size:20px;
     padding:15px 20px;
   }
+`;
+
+const MoreInfoBtn=styled.button`
+    background-color:#183557;
+    padding:10px 15px;
+    border-radius:10px;
+    color:white;
+    font-size:15px;
+    font-weight:bolder;
+    border-width:0px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    @media (min-width: 800px) {
+      font-size:20px;
+      padding:15px 20px;
+    }
+
 `;
 
 const TopStartLoading=styled.h1`
@@ -311,64 +330,64 @@ const Main = ({history}) => {
       setResult(prediction[0].className)
       switch(prediction[0].className){
         case "김정은":
-          setKeyword("김정은 말");
+          setKeyword("내래 북한 백두혈통이야");
           break;
         case "마크롱":
-          setKeyword("마크롱 말");
+          setKeyword("프랑스 최연소 대통령");
           break;
         case "메르켈":
-          setKeyword("메르켈 말");
+          setKeyword("게르만 철의 여인");
           break;
         case "문재인":
-          setKeyword("문재인 말");
+          setKeyword("대한민국 19대 대통령");
           break;
         case "바이든":
-          setKeyword("바이든 말");
+          setKeyword("BUILD BACK BETTER");
           break;
         case "보리스존슨":
-          setKeyword("보리스존슨 말");
+          setKeyword("브렉시트를 완수하고 영국의 잠재력을 일깨우자");
           break;
         case "시진핑":
-          setKeyword("시진핑 말");
+          setKeyword("중화인민공화국의 정치인");
           break;
         case "심상정":
-          setKeyword("심상정 말");
+          setKeyword("정의당당당 주4일제");
           break;
         case "아베":
-          setKeyword("아베 말");
+          setKeyword("역대 최장 기간 집권한 일본 총리");
           break;
         case "아웅산수치":
-          setKeyword("아웅산수치 말");
+          setKeyword("미얀마 민주화운동의 상징");
           break;
         case "안철수":
-          setKeyword("안철수 말");
+          setKeyword("의사, 프로그래머, 벤처 기업 CEO, 대학 교수");
           break;
         case "오바마":
-          setKeyword("오바마 말");
+          setKeyword("Yes, We can!");
           break;
         case "윤석열":
-          setKeyword("윤석열 말");
+          setKeyword("법조인 출신 정치인으로, 前 검찰총장");
           break;
         case "이재명":
-          setKeyword("이재명 말");
+          setKeyword("변호사 출신 정치인, 前 성남시장");
           break;
         case "줄리아길라드":
-          setKeyword("줄리아길라드 말");
+          setKeyword("호주 첫 여성총리");
           break;
         case "트럼프":
-          setKeyword("트럼프 말");
+          setKeyword("MAKE AMERICA GREAT AGAIN!");
           break;
         case "푸틴":
           setKeyword("러시아 상남자");
           break;
         case "허경영":
-          setKeyword("허경영 말");
+          setKeyword("내 눈을 바라봐. 넌 건강해지고");
           break;
         case "홍준표":
-          setKeyword("홍준표 말");
+          setKeyword("대한민국의 검사 출신 정치인. 現 제21대 국회의원");
           break;
         case "힐러리":
-          setKeyword("힐러리 말");
+          setKeyword("미국 역사상 최초 여성 대통령 후보");
           break;
         default:
           break;
@@ -411,7 +430,7 @@ const Main = ({history}) => {
             url: 'https://politictest.netlify.app/',
         });
     }else{
-        alert("공유하기가 지원되지 않는 환경 입니다.")
+        alert("공유하기가 지원되지 않는 브라우저 입니다.")
     }
 
     }
@@ -458,23 +477,33 @@ const Main = ({history}) => {
                 <ReulstName>{showResult?predictionArr[0].className:null}</ReulstName>
             </ResultContainer>
             <KeyText>{keyword}</KeyText>
-            <SubText>도플갱어인가요?</SubText>
-            </MiddleContainer>
-            <ImageContainer>
-                <Image id="srcImg" src={require(`../assets/${result}.jpg`)}></Image>
-            </ImageContainer>
-            <RestResultRow>
-              <RestResultCol>
-                <RestResultScore>{showResult?`${(predictionArr[1].probability*100).toFixed(1)}%`:null}</RestResultScore>
-                <RestResultRank>2위</RestResultRank>
-                <RestResultName>{showResult?predictionArr[1].className:null}</RestResultName>
-              </RestResultCol>
-              <RestResultCol>
-                <RestResultScore>{showResult?`${(predictionArr[2].probability*100).toFixed(1)}%`:null}</RestResultScore>
-                <RestResultRank>3위</RestResultRank>
-                <RestResultName>{showResult?predictionArr[2].className:null}</RestResultName>
-              </RestResultCol>
-            </RestResultRow>
+            <SubText>{predictionArr[0].probability*100>80?"도플갱어 아니신가요?":predictionArr[0].probability*100>50?"형제자매가 확실합니다.":predictionArr[0].probability*100>20?"닮았다는 소리 들어보셨죠?":"3초 닮은꼴"}</SubText>
+            <MoreInfoBtn onClick={()=>{
+              if(predictionArr[0].className=="트럼프"){
+                window.open(`https://ko.wikipedia.org/wiki/도널드_트럼프`,'_blank')
+                return null
+              }else if(predictionArr[0].className=="마크롱"){
+                window.open(`https://ko.wikipedia.org/wiki/에마뉘엘_마크롱`,'_blank')
+                return null
+              }
+              window.open(`https://ko.wikipedia.org/wiki/${predictionArr[0].className}`,'_blank')
+            }}>더보기</MoreInfoBtn>
+        </MiddleContainer>
+        <ImageContainer>
+            <Image id="srcImg" src={require(`../assets/${result}.jpg`)}></Image>
+        </ImageContainer>
+        <RestResultRow>
+          <RestResultCol>
+            <RestResultScore>{showResult?`${(predictionArr[1].probability*100).toFixed(1)}%`:null}</RestResultScore>
+            <RestResultRank>2위</RestResultRank>
+            <RestResultName>{showResult?predictionArr[1].className:null}</RestResultName>
+          </RestResultCol>
+          <RestResultCol>
+            <RestResultScore>{showResult?`${(predictionArr[2].probability*100).toFixed(1)}%`:null}</RestResultScore>
+            <RestResultRank>3위</RestResultRank>
+            <RestResultName>{showResult?predictionArr[2].className:null}</RestResultName>
+          </RestResultCol>
+        </RestResultRow>
         </>
       :null}
       {showResult?<BottomContainer>
