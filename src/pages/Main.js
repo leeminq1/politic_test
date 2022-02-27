@@ -446,7 +446,7 @@ const Main = ({history}) => {
       <ImageContainer onClick={()=>{
           inputRef.current.click();
       }}>
-        <ImageUploadContainer ref={inputRef} onChange={handleChangeFile} type="file" accept="image/*;capture=camera" />
+        <ImageUploadContainer ref={inputRef} onChange={handleChangeFile} type="file" accept="image/*" />
         {imgBase64?<Image id="srcImg" src={imgBase64}></Image>: 
         <>
           <BgImg src={require("../assets/someone.png")}></BgImg>
