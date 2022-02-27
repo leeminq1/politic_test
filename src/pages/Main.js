@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 // import * as tf from '@tensorflow/tfjs';
 import * as tmImage from '@teachablemachine/image';
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { FaArrowAltCircleDown } from "react-icons/fa";
 import { MdIosShare } from "react-icons/md";
 import {BsArrowCounterclockwise} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import KakaoShareBtn from '../components/KakaoSharedBtn';
 
 
 import Dots from "react-activity/dist/Dots";
@@ -53,7 +54,7 @@ const ImageUploadContainer=styled.input`
 const ImageContainer=styled.div`
     position:relative;
     width: 70%;
-    height: 22%;
+    height: 28%;
     display:flex;
     background-color:rgba(0, 0, 0, 0.07);
     border-radius:10px;
@@ -75,7 +76,7 @@ const Image=styled.img`
 const Title=styled.h1`
   font-size:20px;
   font-weight:bolder;   
-  color:#341f97;
+  color:#224976;
   @media (min-width: 800px) {
     font-size:25px;
   }
@@ -151,10 +152,10 @@ const BottomContainer=styled.div`
 `;
 
 const BottomBtn=styled.button`
-   background-color:${pros=>pros.name==="share"?"#FED16E":"#323232"};
+   background-color:${pros=>pros.name==="share"?"#183557":"#2E2E2E"};
    padding:10px 15px;
    border-radius:10px;
-   color:${pros=>pros.name==="share"?"#353535":"#ffffff"};
+   color:${pros=>pros.name==="share"?"#ffffff":"#ffffff"};
    font-size:15px;
    font-weight:bolder;
    border-width:0px;
@@ -264,6 +265,16 @@ const Main = ({history}) => {
     const [predictionArr,setPredictionArr]=useState([]);
     const [result,setResult]=useState(null);
     const [keyword,setKeyword]=useState(null);
+
+    useEffect(() => {
+      const script = document.createElement("script");
+      script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+      script.async = true;
+      document.body.appendChild(script);
+      return () => {
+        document.body.removeChild(script);
+      };
+    }, []);
 
     //react-router 사용
     const navigate=useNavigate();
@@ -391,6 +402,21 @@ const Main = ({history}) => {
   
       }
     }
+
+    const handleShare=()=>{
+      if (navigator.share) {
+        navigator.share({
+            title: '나와 닮은 정치인은?',
+            // text: 'Hello World',
+            url: 'https://politictest.netlify.app/',
+        });
+    }else{
+        alert("공유하기가 지원되지 않는 환경 입니다.")
+    }
+
+    }
+
+
   return (
     <Container>
       <TopContainer>
@@ -417,7 +443,7 @@ const Main = ({history}) => {
 
       {loading&&result===null?
       <>
-        <Dots size={45} color="blue"></Dots>
+        <Dots size={45} color="#224976"></Dots>
         <Title>분석중...</Title>
         <BottomImg src={require('../assets/png/NowLoading.png')}></BottomImg>
         </>
@@ -452,7 +478,8 @@ const Main = ({history}) => {
         </>
       :null}
       {showResult?<BottomContainer>
-        <BottomBtn name={"share"}><MdIosShare size={30} color="black" style={{marginRight:5}}></MdIosShare>공유하기</BottomBtn>
+        <KakaoShareBtn name={predictionArr[0].className}></KakaoShareBtn>
+        <BottomBtn onClick={()=>{handleShare()}} name={"share"}><MdIosShare size={30} color="#ffffff"></MdIosShare></BottomBtn>
         <BottomBtn onClick={()=>{navigate("/") }} name={"retry"}><BsArrowCounterclockwise size={30} color="white" style={{marginRight:5}}></BsArrowCounterclockwise>다시하기</BottomBtn>
       </BottomContainer>:null
       }
