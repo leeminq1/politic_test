@@ -18,6 +18,7 @@ const Container = styled.div`
   position:relative;
   @media (min-width: 800px) {
     width: 600px;
+    height: 100vh;
     /* border:1px solid #95afc0; */
     /* border-left:1px solid #95afc0;
     border-right:1px solid #95afc0; */
@@ -59,6 +60,10 @@ const BottomImg=styled.img`
     width:100%;
     position:absolute;
     bottom:0px;
+    object-fit: contain;
+    @media (min-width: 800px) {
+      width:70%;
+  }
 `;
 
 export default function Loading() {

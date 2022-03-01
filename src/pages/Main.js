@@ -37,6 +37,7 @@ const Container = styled.div`
   /* position:relative; */
   @media (min-width: 800px) {
     width: 600px;
+    height: 100vh;
     /* border-left:1px solid #95afc0;
     border-right:1px solid #95afc0; */
   }
@@ -113,7 +114,6 @@ const ReulstName=styled.h1`
     font-size:20px;
     font-weight:bolder;
     background-color:#304967;
-    border-radius:5px;
     margin-left:5px;
     padding:5px 7px;
     @media (min-width: 800px) {
@@ -171,7 +171,7 @@ const BottomBtn=styled.button`
 `;
 
 const MoreInfoBtn=styled.button`
-    background-color:#183557;
+    background-color:#2E2E2E;
     padding:10px 15px;
     border-radius:10px;
     color:white;
@@ -214,8 +214,8 @@ const CommentMsg=styled.h1`
   font-weight:bolder;
   color:#858585;
   width:70%;
-  position:relative;
-  top:20px;
+  /* position:relative;
+  top:20px; */
   @media (min-width: 800px) {
     font-size:22px;
   }
@@ -224,8 +224,12 @@ const CommentMsg=styled.h1`
 const BottomImg=styled.img`
     width:100%;
     height:30%;
-    position:absolute;
-    bottom:0px;
+    /* position:absolute;
+    bottom:0px; */
+    object-fit: contain;
+    @media (min-width: 800px) {
+      height:27%;
+  }
 `;
 
 const RestResultRow=styled.div`
@@ -276,6 +280,8 @@ const RestResultName=styled.h1`
 `;
 
 
+
+
 const Main = ({history}) => {
     const [imgBase64, setImgBase64] = useState(""); // 파일 base64
     const [imgFile, setImgFile] = useState(null);	//파일
@@ -285,11 +291,48 @@ const Main = ({history}) => {
     const [result,setResult]=useState(null);
     const [keyword,setKeyword]=useState(null);
 
+    const KakaoLoadOne=()=>{
+      let ins = document.createElement('ins');
+      let scr = document.createElement('script');
+  
+      ins.className = 'kakao_ad_area';
+      ins.style = "display:none; width:100%;";
+      scr.async = 'true';
+      scr.type = "text/javascript";
+      scr.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+      ins.setAttribute('data-ad-width', '300');
+      ins.setAttribute('data-ad-height', '250');
+      ins.setAttribute('data-ad-unit', 'DAN-J0PiTjWynwKBRVcK');
+  
+      document.querySelector('.adfitOne').appendChild(ins);
+      document.querySelector('.adfitOne').appendChild(scr);
+    }
+
+    const KakaoLoadTwo=()=>{
+      let ins = document.createElement('ins');
+      let scr = document.createElement('script');
+      ins.className = 'kakao_ad_area';
+      ins.style = "display:none; width:100%;";
+      scr.async = 'true';
+      scr.type = "text/javascript";
+      scr.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+
+      ins.setAttribute('data-ad-width', '320');
+      ins.setAttribute('data-ad-height', '100');
+      ins.setAttribute('data-ad-unit', 'DAN-qG0tstKLlTexIKGz');
+  
+      document.querySelector('.adfitTwo').appendChild(ins);
+      document.querySelector('.adfitTwo').appendChild(scr);
+
+    }
+
+
     useEffect(() => {
       const script = document.createElement("script");
       script.src = "https://developers.kakao.com/sdk/js/kakao.js";
       script.async = true;
       document.body.appendChild(script);
+      KakaoLoadOne();
       return () => {
         document.body.removeChild(script);
       };
@@ -393,6 +436,7 @@ const Main = ({history}) => {
           break;
       }
       console.log("가장높은확률 : ",prediction[0].className)
+      KakaoLoadTwo();
       
     }
   
@@ -442,6 +486,7 @@ const Main = ({history}) => {
           <TopTitle>나와 닮은 정치인은?</TopTitle>
           <TopImage src={require("../assets/loading.png")}></TopImage>
       </TopContainer>
+
       {showResult?<TopStart>분석결과는?</TopStart>:<TopStartLoading>{loading?"잠시만 기다려주세요!":"사진을 업로드 해주세요!"}</TopStartLoading>}
       <ImageContainer onClick={()=>{
           inputRef.current.click();
@@ -450,13 +495,14 @@ const Main = ({history}) => {
         {imgBase64?<Image id="srcImg" src={imgBase64}></Image>: 
         <>
           <BgImg src={require("../assets/someone.png")}></BgImg>
-          <ImageText>GIVE ME A PICTURE YOUR PICTURE!</ImageText>
+          <ImageText>GIVE ME A YOUR PICTURE!</ImageText>
         </>
         }
       </ImageContainer>
       {!loading&&result===null?<>
       <CommentMsg>※업로드 된 사진은 별도로 수집, 보존
                   하지않고 얼굴인식 용도에만 사용됩니다.</CommentMsg>
+      <div className='adfitOne'></div>
       <BottomImg src={require('../assets/png/beforeLoading.png')}></BottomImg>
       </>:null}
 
@@ -492,6 +538,7 @@ const Main = ({history}) => {
         <ImageContainer>
             <Image id="srcImg" src={require(`../assets/${result}.jpg`)}></Image>
         </ImageContainer>
+        <div className='adfitTwo'></div>    
         <RestResultRow>
           <RestResultCol>
             <RestResultScore>{showResult?`${(predictionArr[1].probability*100).toFixed(1)}%`:null}</RestResultScore>

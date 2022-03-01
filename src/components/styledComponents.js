@@ -15,6 +15,7 @@ export const Container = styled.div`
   /* position:relative; */
   @media (min-width: 800px) {
     width: 600px;
+    height: 100vh;
     /* border-left:1px solid #95afc0;
     border-right:1px solid #95afc0; */
   }
