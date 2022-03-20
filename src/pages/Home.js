@@ -26,7 +26,7 @@ function Home() {
     scr.src = "//t1.daumcdn.net/kas/static/ba.min.js";
     ins.setAttribute('data-ad-width', '300');
     ins.setAttribute('data-ad-height', '250');
-    ins.setAttribute('data-ad-unit', 'DAN-eMbqwZaNlsXdwuiT');
+    ins.setAttribute('data-ad-unit', '광고 단위 id');
 
     document.querySelector('.adfit').appendChild(ins);
     document.querySelector('.adfit').appendChild(scr);
