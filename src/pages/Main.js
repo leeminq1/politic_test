@@ -302,7 +302,7 @@ const Main = ({history}) => {
       scr.src = "//t1.daumcdn.net/kas/static/ba.min.js";
       ins.setAttribute('data-ad-width', '300');
       ins.setAttribute('data-ad-height', '250');
-      ins.setAttribute('data-ad-unit', 'DAN-J0PiTjWynwKBRVcK');
+      ins.setAttribute('data-ad-unit', '광고 단위 id');
   
       document.querySelector('.adfitOne').appendChild(ins);
       document.querySelector('.adfitOne').appendChild(scr);
@@ -319,7 +319,7 @@ const Main = ({history}) => {
 
       ins.setAttribute('data-ad-width', '320');
       ins.setAttribute('data-ad-height', '100');
-      ins.setAttribute('data-ad-unit', 'DAN-qG0tstKLlTexIKGz');
+      ins.setAttribute('data-ad-unit', '광고 단위 id');
   
       document.querySelector('.adfitTwo').appendChild(ins);
       document.querySelector('.adfitTwo').appendChild(scr);
